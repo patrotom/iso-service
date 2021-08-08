@@ -1,6 +1,6 @@
 class Result:
-    def __init__(self, data, success, http_code=200, error=''):
-        self.data = data
+    def __init__(self, success, http_code=200, data=None, errors=None):
         self.success = success
         self.http_code = http_code
-        self.error = error
+        self.data = data
+        self.errors = errors

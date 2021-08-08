@@ -22,7 +22,7 @@ def runner(app):
 @pytest.fixture
 def valid_request_data():
     return {
-        'iso': 'svk',
+        'iso': 'sVk',
         'countries': [
             'iran',
             'Slowakei',
