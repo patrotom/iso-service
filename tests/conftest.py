@@ -1,5 +1,4 @@
 import pytest
-import json
 
 from iso_service import create_app
 
@@ -21,17 +20,30 @@ def runner(app):
 
 
 @pytest.fixture
-def valid_body():
-    return json.dumps({
+def valid_request_data():
+    return {
         'iso': 'svk',
         'countries': [
             'iran',
             'Slowakei',
             'Vatikan',
-            'Slovaška',
-            'Szlovakia',
+            'Slovačka',
+            'Szlovákia',
             'Belgrade',
             'España',
             'Nizozemsko'
         ]
-    })
+    }
+
+
+@pytest.fixture
+def valid_response_data():
+    return {
+        'iso': 'SVK',
+        'match_count': 3,
+        'matches': [
+            'Slowakei',
+            'Slovačka',
+            'Szlovákia'
+        ]
+    }
