@@ -16,7 +16,7 @@ def test_run_with_invalid_iso(valid_request_data):
     expected_errors = ['ISO code not found in our database']
 
     assert result.success == False
-    assert result.error == expected_errors
+    assert result.errors == expected_errors
     assert result.http_code == 400
 
 
@@ -26,7 +26,7 @@ def test_run_with_invalid_iso_length(valid_request_data):
     expected_errors = ['Invalid length of ISO code']
 
     assert result.success == False
-    assert result.error == expected_errors
+    assert result.errors == expected_errors
     assert result.http_code == 400
 
 
@@ -36,5 +36,5 @@ def test_run_with_invalid_input():
     expected_errors = ["'list' object has no attribute 'upper'"]
 
     assert result.success == False
-    assert result.error == expected_errors
+    assert result.errors == expected_errors
     assert result.http_code == 500
