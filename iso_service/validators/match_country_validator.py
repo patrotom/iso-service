@@ -1,7 +1,7 @@
 from flask_inputs import Inputs
 from flask_inputs.validators import JsonSchema
 
-from iso_service.result import Result
+from iso_service.utils.result import Result
 from iso_service.validators.base_validator import BaseValidator
 
 

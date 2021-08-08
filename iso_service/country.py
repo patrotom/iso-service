@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 
 
-from iso_service.country_matcher import CountryMatcher
+from iso_service.utils.country_matcher import CountryMatcher
 from iso_service.validators.match_country_validator import MatchCountryValidator
 
 

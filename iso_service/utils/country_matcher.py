@@ -1,7 +1,7 @@
 import os
 import json
 
-from iso_service.result import Result
+from iso_service.utils.result import Result
 
 
 class CountryMatcher:
@@ -57,7 +57,7 @@ class CountryMatcher:
 
     def __load_countries_data(self):
         dir_path = os.path.dirname(os.path.realpath(__file__))
-        path_segments = dir_path.split('/')[:-1]
+        path_segments = dir_path.split('/')[:-2]
         path_segments.append('data/countries.json')
         file_path = '/'.join(path_segments)
 
