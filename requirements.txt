@@ -1,4 +1,6 @@
 flask
+flask_caching
 flask_inputs
 jsonschema
 pytest
+redis

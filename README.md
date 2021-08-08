@@ -2,4 +2,10 @@
 
 # ISO Service
 
-`TODO`
+`TODO:`
+
+* Add package versions to `requirements.txt`.
+* Comment the code.
+* Enhance `Dockerfile` (e.g. upgrade pip before installing requirements).
+* Add Open API 3.0 docs.
+* Add proper readme.
