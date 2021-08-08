@@ -2,9 +2,10 @@ from flask_inputs import Inputs
 from flask_inputs.validators import JsonSchema
 
 from iso_service.result import Result
+from iso_service.validators.base_validator import BaseValidator
 
 
-match_country_schema = {
+SCHEMA = {
     'type': 'object',
     'required': [
         'iso',
@@ -31,13 +32,17 @@ match_country_schema = {
 
 
 class MatchCountryInputs(Inputs):
-    json = [JsonSchema(schema=match_country_schema)]
+    json = [JsonSchema(schema=SCHEMA)]
 
 
-def validate_match_country(request):
-    inputs = MatchCountryInputs(request)
+class MatchCountryValidator(BaseValidator):
+    def run(self, request):
+        if not self._is_json(request):
+            return Result(False, http_code=400, errors=['Payload is not a valid JSON'])
 
-    if inputs.validate():
-        return Result(True)
-    else:
-        return Result(False, http_code=400, errors=inputs.errors)
+        inputs = MatchCountryInputs(request)
+
+        if inputs.validate():
+            return Result(True, data=request.get_json())
+        else:
+            return Result(False, http_code=400, errors=inputs.errors)

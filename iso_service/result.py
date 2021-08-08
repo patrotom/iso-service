@@ -4,3 +4,9 @@ class Result:
         self.http_code = http_code
         self.data = data
         self.errors = errors
+
+    def to_response(self):
+        if self.success:
+            return {'data': self.data}, self.http_code
+        else:
+            return {'errors': self.errors}, self.http_code
