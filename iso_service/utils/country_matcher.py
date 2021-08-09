@@ -1,15 +1,35 @@
 import os
 import json
 
+from typing import List
+
 from iso_service.utils.result import Result
 
 
 class CountryMatcher:
-    def __init__(self, iso, countries):
+    '''
+    The CountryMatcher class is a simple service class that takes `iso` code
+    `countries` list and filters out the countries (names) corresponding to the
+    given `iso` code.
+    
+    The `iso` code is a `String` that corresponds to the ISO 3166-1 alpha-2 or
+    alpha-3 standards.
+
+    The `countries` are a `List` of `String`s with the country names that can be
+    in different languages.
+    '''
+    def __init__(self, iso: str, countries: List[str]):
         self.iso = iso
         self.countries = countries
 
-    def run(self):
+    def run(self) -> Result:
+        '''
+        Filters out the country names based on the given ISO code. It returns the
+        `Result` object that can be either success or failure.
+
+        It uses localization data from the file `countries.json` located under
+        the `data/` directory in the root of the repository.
+        '''
         try:
             self.iso = self.iso.upper()
             matches = []
@@ -67,6 +87,11 @@ class CountryMatcher:
 
 
 class CountryMatcherError(Exception):
+    '''
+    The `CountryMatcherError` class represents an error that occurred while
+    matching the countries. This error occurs when someone provides invalid
+    data to the `CountryMatcher`.
+    '''
     def __init__(self, message):
         self.message = message
     

@@ -1,3 +1,4 @@
+from flask import Request
 from flask_inputs import Inputs
 from flask_inputs.validators import JsonSchema
 
@@ -36,7 +37,11 @@ class MatchCountryInputs(Inputs):
 
 
 class MatchCountryValidator(BaseValidator):
-    def run(self, request):
+    '''
+    The `MatchCountryValidator` validates the request payload of the
+    `POST /match_country` endpoint.
+    '''
+    def run(self, request: Request) -> Result:
         if not self._is_json(request):
             return Result(False, http_code=400, errors=['Payload is not a valid JSON'])
 

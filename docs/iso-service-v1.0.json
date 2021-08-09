@@ -19,7 +19,7 @@
                 "tags": [
                     "match_country"
                 ],
-                "description": "The endpoint takes a list of country names (in different languages) and a country ISO code. It filters out the country names corresponding to the given ISO code and returns them to the output.",
+                "description": "The endpoint takes a list of country names (in different languages) and a country ISO code. It filters out the country names corresponding to the given ISO code and returns them to the output. The ISO code corresponds to the ISO 3166-1 alpha-2 or alpha-3 standards.",
                 "requestBody": {
                     "content": {
                         "application/json": {
