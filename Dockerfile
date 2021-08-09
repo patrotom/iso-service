@@ -1,4 +1,6 @@
 FROM python:3.9.1
-ADD . /app
 WORKDIR /app
-RUN pip install -r requirements.txt
+COPY requirements.txt .
+RUN pip3 install --no-cache-dir --upgrade pip && \
+    pip3 install -r requirements.txt --no-cache-dir
+COPY . .
