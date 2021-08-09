@@ -1,4 +1,6 @@
-flask
-flask_inputs
-jsonschema
-pytest
+flask==2.0.1
+flask_caching==1.10.1
+flask_inputs==0.3.0
+jsonschema==3.2.0
+pytest==6.2.4
+redis==3.5.3
