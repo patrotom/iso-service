@@ -1,0 +1,200 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "ISO Matcher Microservice",
+        "description": "This is a simple API of the microservice used for filtering country names based on the ISO code.",
+        "version": "1.0",
+        "contact": {
+            "email": "tomas.patro@gmail.com"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:5000"
+        }
+    ],
+    "paths": {
+        "/match_country": {
+            "post": {
+                "tags": [
+                    "match_country"
+                ],
+                "description": "The endpoint takes a list of country names (in different languages) and a country ISO code. It filters out the country names corresponding to the given ISO code and returns them to the output.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/matchCountryRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully filters out the country names.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/matchCountryResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request body is invalid.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/badRequest"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Something went wrong on the server-side.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/internalServerError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "matchCountryRequest": {
+                "type": "object",
+                "example": {
+                    "iso": "svk",
+                    "countries": [
+                        "iran",
+                        "Slowakei",
+                        "Vatikan",
+                        "Slovačka",
+                        "Szlovákia",
+                        "Belgrade",
+                        "España",
+                        "Nizozemsko"
+                    ]
+                },
+                "required": [
+                    "iso",
+                    "countries"
+                ],
+                "properties": {
+                    "iso": {
+                        "type": "string"
+                    },
+                    "countries": {
+                        "type": "array",
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "matchCountryResponse": {
+                "type": "object",
+                "example": {
+                    "iso": "svk",
+                    "match_count": 3,
+                    "matches": [
+                        "Slowakei",
+                        "Slovačka",
+                        "Szlovákia"
+                    ]
+                },
+                "required": [
+                    "data"
+                ],
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "required": [
+                            "iso",
+                            "match_count",
+                            "matches"
+                        ],
+                        "properties": {
+                            "iso": {
+                                "type": "string"
+                            },
+                            "match_count": {
+                                "type": "integer"
+                            },
+                            "matches": {
+                                "type": "array",
+                                "items": {
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                },
+                "additionalProperties": false
+            },
+            "badRequest": {
+                "type": "object",
+                "example": {
+                    "errors": [
+                        "'iso' is a required property"
+                    ]
+                },
+                "required": [
+                    "errors"
+                ],
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "internalServerError": {
+                "type": "object",
+                "example": {
+                    "errors": [
+                        "ValueError: math domain error"
+                    ]
+                },
+                "required": [
+                    "errors"
+                ],
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "additionalProperties": false
+            }
+        }
+    }
+}
